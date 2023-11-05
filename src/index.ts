@@ -1,6 +1,9 @@
 import Express from 'express';
 const client = Express();
 
+import { config } from 'dotenv';
+config();
+
 client.use(Express.json());
 
 import router from './router';

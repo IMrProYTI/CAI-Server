@@ -20,7 +20,6 @@ class CharacterAI {
 	};
 
 	private authenticate(): void {
-		const token = process.env.TOKEN;
 		if (this.TOKEN) {
 			this.authenticateWithToken();
 		} else {

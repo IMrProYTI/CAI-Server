@@ -5,6 +5,7 @@ API Сервер Character.AI со встроенным переводчиком
 Создайте `.env` файл со следующими полями:
 ```properties
 PORT = "" # Порт для CAI сервера
+AUTH = "" # Строка которая необходима для авторизации на сервере.
 TOKEN = "" # Токен с сайта (access_token)
 CHARID = "" # ID персонажа с сайта
 ```
@@ -31,7 +32,8 @@ async function ChatAI() {
 		'http://localhost:8080/',
 		{
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"Authorization": "some_secret_string"
 			},
 			body: JSON.stringify({
 				content: "Как дела?",
@@ -52,11 +54,13 @@ async function ChatAI() {
 		'http://localhost:8000/',
 		{
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"Authorization": "some_secret_string"
 			},
 			body: JSON.stringify({
 				content: "How are you?",
-				username: "POTI"
+				username: "POTI",
+				token: 'some_secret_string'
 			}
 		)
 	});

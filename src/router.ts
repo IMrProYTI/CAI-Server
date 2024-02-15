@@ -7,6 +7,10 @@ const translate = new Translate();
 const characterAI = new CharacterAI();
 
 router.get('/', async (req, res) => {
+	res.status(200).send({ status: `CAI-Server is running!` });
+});
+
+router.get('/:characterId', async (req, res) => {
 	const { authorization } = req.headers;
 	const { content, language, username } = req.body;
 	
@@ -23,7 +27,8 @@ router.get('/', async (req, res) => {
 				const userInput = await translate.en(content);
 		
 				const rawText = await characterAI.sendAndAwaitResponse(
-					`(OCC: This message was sent by ${username} - context is that multiple people are using you to in a chatroom): ${userInput}`
+					`(OCC: This message was sent by ${username} - context is that multiple people are using you to in a chatroom): ${userInput}`,
+					req.params.characterId
 				);
 		
 				const text = await translate.locale(rawText, language);

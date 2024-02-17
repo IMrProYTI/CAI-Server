@@ -101,7 +101,7 @@ async function ChatAI(charId) {
 	const response = await fetch(
 		`http://localhost:8080/${charId}`,
 		{
-    	method: "PUT",
+			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "some_secret_string"
@@ -124,7 +124,7 @@ async function ChatAI(charId) {
 	const response = await fetch(
 		`http://localhost:8080/${charId}`,
 		{
-    	method: "PUT",
+			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "some_secret_string"

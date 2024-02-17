@@ -131,8 +131,7 @@ async function ChatAI(charId) {
 			},
 			body: JSON.stringify({
 				content: "How are you?",
-				username: "POTI",
-				token: 'some_secret_string'
+				username: "POTI"
 			}
 		)
 	});

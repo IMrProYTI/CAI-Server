@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 	res.status(200).send({ status: `CAI-Server is running!` });
 });
 
-router.get('/:characterId', async (req, res) => {
+router.put('/:characterId', async (req, res) => {
 	const { authorization } = req.headers;
 	const { content, language, username } = req.body;
 	

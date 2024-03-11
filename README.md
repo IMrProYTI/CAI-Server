@@ -17,8 +17,8 @@ _Рекомендуем использовать Docker._
 git clone https://github.com/TES-Empire/CAI-Server
 cd CAI-Server
 ```
-3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main#настройка-supabase)
-4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-env-файла)
+3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main?tab=readme-ov-file#настройка-supabase)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main?tab=readme-ov-file#создание-env-файла)
 5. Соберите Docker Image и запустите его.
 ```bash
 docker build -t cai-server .
@@ -33,8 +33,8 @@ docker run -p 8080:8080 -d cai-server
 git clone https://github.com/TES-Empire/CAI-Server
 cd CAI-Server
 ```
-3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main#настройка-supabase)
-4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-env-файла)
+3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main?tab=readme-ov-file#настройка-supabase)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main?tab=readme-ov-file#создание-env-файла)
 5. Соберите Docker Image и запустите его.  
 _(Могут потребоваться права суперпользователя)_
 ```bash
@@ -55,7 +55,7 @@ cd CAI-Server
 npm install
 npx tsc
 ```
-4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-env-файла)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main?tab=readme-ov-file#создание-env-файла)
 5. Запустите сервер:
 ```bash
 npm start
@@ -67,7 +67,7 @@ npm start
 
 Используйте `http://localhost:{PORT}/{characterId}` и радуйтесь жизни :blush:
 
-Для запросов первое что необходимо, это `characterId`, которое берётся с [сайта](beta.character.ai) и вставляется в url.  
+Для запросов первое что необходимо, это `characterId`, которое берётся с [сайта](https://beta.character.ai) и вставляется в url.  
 Необходимы 2 поля в body это `content` и `username`, а так же header `Authorization` с вашем секретным ключём оставленным на БД.
 
 Поле `language` опционально. (По умолчанию язык вывода `en`)  

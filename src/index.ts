@@ -1,13 +1,15 @@
-import Express from 'express';
-const client = Express();
+import fastify from './fastify';
 
-import { config } from 'dotenv';
+import { config } from "dotenv";
 config();
 
-client.use(Express.json());
+const PORT = Number(process.env.PORT) || 8080;
 
-import router from './router';
-client.use(router);
-
-const { PORT } = process.env;
-client.listen(Number(PORT), () => { console.log(`Listening on port ${PORT}`) });
+(() => {
+	try {
+		fastify.listen({ port: PORT });
+	} catch (err) {
+		fastify.log.error(err);
+		process.exit(1);
+	};
+})();

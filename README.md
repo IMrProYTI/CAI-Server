@@ -2,21 +2,10 @@
 
 API Сервер Character.AI со встроенным переводчиком!!!
 
-Создайте `.env` файл в корневой папке со следующими полями:
-```properties
-PORT = "" # Порт для CAI сервера
-AUTH = "" # Строка которая необходима для авторизации на сервере.
-TOKEN = "" # Токен с сайта (access_token)
-```
-
-Соберите проект и просто запустите сервер:
-```cmd
-npx tsc
-npm start
-```
+На данный момент стабильнее API я не нашёл. Так что можно использовать это :)
 
 # Быстрый запуск:
-Рекомендуем использовать Docker.
+_Рекомендуем использовать Docker._
 
 ## Используя Docker
 
@@ -28,13 +17,9 @@ npm start
 git clone https://github.com/TES-Empire/CAI-Server
 cd CAI-Server
 ```
-3. Создайте `.env` файл в корневой папке со следующими полями:
-```properties
-PORT = "" # Порт для CAI сервера
-AUTH = "" # Строка которая необходима для авторизации на сервере.
-TOKEN = "" # Токен с сайта (access_token)
-```
-4. Соберите Docker Image и запустите его.
+3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main#настройка-supabase)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-.env-файла)
+5. Соберите Docker Image и запустите его.
 ```bash
 docker build -t cai-server .
 docker run -p 8080:8080 -d cai-server
@@ -48,13 +33,9 @@ docker run -p 8080:8080 -d cai-server
 git clone https://github.com/TES-Empire/CAI-Server
 cd CAI-Server
 ```
-3. Создайте `.env` файл в корневой папке со следующими полями:
-```properties
-PORT = "" # Порт для CAI сервера
-AUTH = "" # Строка которая необходима для авторизации на сервере.
-TOKEN = "" # Токен с сайта (access_token)
-```
-4. Соберите Docker Image и запустите его.  
+3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main#настройка-supabase)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-.env-файла)
+5. Соберите Docker Image и запустите его.  
 _(Могут потребоваться права суперпользователя)_
 ```bash
 docker build -t cai-server .
@@ -74,25 +55,22 @@ cd CAI-Server
 npm install
 npx tsc
 ```
-4. Создайте `.env` файл в корневой папке со следующими полями:
-```properties
-PORT = "" # Порт для CAI сервера
-AUTH = "" # Строка которая необходима для авторизации на сервере.
-TOKEN = "" # Токен с сайта (access_token)
-```
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-.env-файла)
 5. Запустите сервер:
 ```bash
 npm start
 ```
 
-# API для общения
+# Гайды
+
+## API для общения
 
 Используйте `http://localhost:{PORT}/{characterId}` и радуйтесь жизни :blush:
 
-Для запросов первое что необходимо, это `characterId`.  
-Необходимы 2 поля в body это `content` и `username`, а так же header `Authorization` с вашем секретным ключём (или как вариант оставте заголовок пустым).  
-Поле `language` опционально. (По умолчанию язык вывода `en`)
+Для запросов первое что необходимо, это `characterId`, которое берётся с [сайта](beta.character.ai) и вставляется в url.  
+Необходимы 2 поля в body это `content` и `username`, а так же header `Authorization` с вашем секретным ключём оставленным на БД.
 
+Поле `language` опционально. (По умолчанию язык вывода `en`)  
 `language` формата: `ISO 639-1`
 
 ### Пример №1
@@ -101,7 +79,7 @@ async function ChatAI(charId) {
 	const response = await fetch(
 		`http://localhost:8080/${charId}`,
 		{
-			method: "PUT",
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "some_secret_string"
@@ -124,7 +102,7 @@ async function ChatAI(charId) {
 	const response = await fetch(
 		`http://localhost:8080/${charId}`,
 		{
-			method: "PUT",
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "some_secret_string"
@@ -146,3 +124,20 @@ async function ChatAI(charId) {
 	"text": "Some generated string"
 }
 ```
+
+## Создание .env файла
+```properties
+PORT=8080 # Порт для CAI сервера
+TOKEN=CharacterAiToken # Токен с сайта (access_token)
+SUPABASE_URL=https://xxxxxxxx.supabase.co # url вашей БД
+SUPABASE_KEY=SecretOrPublicKey # ключ для вашей БД
+```
+
+## Настройка Supabase
++ Создайте на [Supabase](https://supabase.com/) аккаунт.
++ Создайте проект, а в нём базу данных под названием `api`.
++ Создайте в таблице два поля `token` ***(string)*** и `is_available` ***(boolean)***.
+  + Другие поля установите значение по своему усмотрению.
++ Занесите в поле `token` токен который в будущем будет использоваться в Header'е `Authorization`, а в поле `is_available` установите значение `true`.
+
+Заранее сохраните в `Project Settings` > `Configuration` > `API` строки/ключи в секциях `Project URL` и `Project API keys`.

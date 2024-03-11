@@ -4,40 +4,48 @@ const fastify = Fastify({
 });
 
 import Supabase from "./Supabase";
-const url = process.env.VITE_SUPABASE_URL || "";
-const key = process.env.VITE_SUPABASE_KEY || "";
-const supabase = new Supabase(url, key);
+const supabase = new Supabase();
 
-import Translate from "./translate";
+import Translate from "./Translate";
 const translate = new Translate();
 
 import CharacterAI from "./CharacterAI";
 const characterAI = new CharacterAI();
 
-interface IBody {
-	content: string;
-	username: string;
-	language?: string
-}
-
-interface IParams {
-	characterId: string
-}
-
-interface IHeaders {
-	"Authorization": string
-}
-
-interface IReply {
-	200: { text: string };
-	401: { error: string };
-}
+fastify.route({
+	method: 'GET',
+	url: '/',
+	schema: {
+		response: {
+			200: {
+				type: 'object',
+				properties: {
+					status: { type: 'string' }
+				}
+			}
+		}
+	},
+	handler: async (_request, reply) => {
+		reply.code(200).send({ status: "CAI-Server is running!" });
+	}
+});
 
 fastify.route<{
-	Body: IBody,
-	Params: IParams,
-	Headers: IHeaders,
-	Reply: IReply
+	Body: {
+		content: string;
+		username: string;
+		language?: string
+	},
+	Params: {
+		characterId: string
+	},
+	Headers: {
+		"Authorization": string
+	},
+	Reply: {
+		200: { text: string };
+		401: { error: string };
+	}
 }>({
 	method: 'POST',
 	url: '/:characterId',
@@ -69,12 +77,12 @@ fastify.route<{
 			}
 		}
 	},
-	preHandler: async (request, reply, done) => {
+	preHandler: async (request, reply, _done) => {
 		const { authorization } = request.headers;
 
 		if (authorization) {
 			if (await supabase.validateToken(authorization))
-				return done();
+				return;
 
 			return reply.code(401).send({ error: "Authorization failed" });
 		};

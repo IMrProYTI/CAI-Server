@@ -18,7 +18,7 @@ git clone https://github.com/TES-Empire/CAI-Server
 cd CAI-Server
 ```
 3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main#настройка-supabase)
-4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-.env-файла)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-env-файла)
 5. Соберите Docker Image и запустите его.
 ```bash
 docker build -t cai-server .
@@ -34,7 +34,7 @@ git clone https://github.com/TES-Empire/CAI-Server
 cd CAI-Server
 ```
 3. [Настройте Supabase](https://github.com/TES-Empire/CAI-Server/tree/main#настройка-supabase)
-4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-.env-файла)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-env-файла)
 5. Соберите Docker Image и запустите его.  
 _(Могут потребоваться права суперпользователя)_
 ```bash
@@ -55,7 +55,7 @@ cd CAI-Server
 npm install
 npx tsc
 ```
-4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-.env-файла)
+4. [Создайте `.env` файл](https://github.com/TES-Empire/CAI-Server/tree/main#создание-env-файла)
 5. Запустите сервер:
 ```bash
 npm start

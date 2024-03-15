@@ -16,8 +16,6 @@ class CharacterAI {
 		const chat = await this.client.createOrContinueChat(character);
 		const response = await chat.sendAndAwaitResponse(input, true);
 
-		console.log(response);
-
 		return response.text;
 	};
 

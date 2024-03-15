@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 const fastify = Fastify({
-	logger: true
+	keepAliveTimeout: 600000,
+	// logger: true
 });
 
 import Supabase from "./Supabase";

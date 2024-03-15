@@ -35,13 +35,5 @@ class Queue {
 	};
 };
 
-const queue = new Queue(async (task) => {
-	return await new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(task.content);
-		}, 2000);
-	});
-});
-
 export { Task };
 export default Queue;
